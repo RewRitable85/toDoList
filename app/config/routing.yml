@@ -1,0 +1,5 @@
+artjom_to_do_list:
+    resource: "@artjomToDoListBundle/Resources/config/routing.yml"
+    prefix:   /
+
+

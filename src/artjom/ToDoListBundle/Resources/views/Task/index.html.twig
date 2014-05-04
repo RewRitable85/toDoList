@@ -1,0 +1,61 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+		<h2 class="text-center">ToDo task list</h2>
+		
+		<div class="row">
+			<div class="col-xs-12 col-md-8">
+				{% if task_totals|length > 0 %}
+					<h4>You have total tasks</h4>
+					{% for total in task_totals %}
+						<p><strong>{{ tostatusname(total.status) }}:</strong> {{ badge(total.total) }}</p>
+					{% endfor %}
+				{% endif %}
+			</div>
+			<div class="col-xs-6 col-md-4 text-right">
+				<a href="{{ path('task_new') }}" role="button" class="btn btn-primary btn-lg active">
+					Create new task
+				</a>
+			</div>
+		</div>
+		
+		{% include 'artjomToDoListBundle:Task:Blocks/taskSearchForm.html.twig' %}
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Status</th>
+					<th>Date started</th>
+					<th>Due date</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% if entities|length > 0 %}
+				{% for entity in entities %}
+					<tr>
+						<td>
+							<a href="{{ path('task_edit', { 'id': entity.id }) }}">
+								{{ entity.title }}
+							</a>
+						</td>
+						<td>{{ tostatusname(entity.status) }}</td>
+						<td>{{ entity.startdate|date('d-m-Y H:i') }}</td>
+						<td>{{ entity.enddate|date('d-m-Y H:i') }}</td>
+						<td>{% if entity.enddate %}{{ entity.description }}{% endif %}</td>
+					</tr>
+				{% endfor %}
+			{% else %}
+				<tr>
+					<td colspan="5">No results</td>
+				</tr>
+			{% endif %}
+			</tbody>
+		</table>
+		
+		<div class="row text-center">
+			{{ knp_pagination_render(entities, null, {}, {"prev_label": "Previous", "next_label": "Next", "first_label": "First", "last_label": "Last"}) }}
+		</div>
+		
+{% endblock %}

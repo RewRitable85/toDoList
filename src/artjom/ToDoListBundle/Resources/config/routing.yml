@@ -1,0 +1,23 @@
+task_list:
+    pattern:   /
+    defaults: { _controller: artjomToDoListBundle:Task:index }
+
+task_edit:
+    pattern:   /edit/{id}
+    defaults: { _controller: artjomToDoListBundle:Task:edit }
+
+task_create:
+    pattern:   /create
+    defaults: { _controller: artjomToDoListBundle:Task:create }
+
+task_new:
+    pattern:   /new
+    defaults: { _controller: artjomToDoListBundle:Task:new }
+
+task_update:
+    pattern:   /{id}
+    defaults: { _controller: artjomToDoListBundle:Task:update }
+
+task_delete:
+    pattern:   /delete/{id}
+    defaults: { _controller: artjomToDoListBundle:Task:delete }
